@@ -71,7 +71,7 @@ if (db.fetch(`kicksayiss_${message.author.id}`) >= kicklimitss) return message.r
 message.guild.member(kicklan).kick()
     db.add(`kicksayiss_${message.author.id}`, 1)
     const faviningotunuskm = new discord.MessageEmbed()
-    . setDescription (`<a:OnaylamakGif:753288622387494992> ${kicklan} kicklendi oc ${message.author} kicklendi`)
+    . setDescription (`<a:OnaylamakGif:753288622387494992> ${kicklan} kicklendi oc ${message.author} kickledi`)
     client.channels.cache.get(kicklanlog).send(faviningotunuskm)
 
   
