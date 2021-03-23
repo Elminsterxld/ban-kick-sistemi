@@ -9,7 +9,7 @@ exports.run = async(client, message, args) => {
   let command = args[0];
   const elminster =  new discord.MessageEmbed()
   .setColor('#E70000')
-  .setFooter('Örnek Kullanım : !!banss banyetkili @rol', client.user.avatarURL())
+  .setFooter('Örnek Kullanım : !!ban banyetkili @rol', client.user.avatarURL())
   . setDescription (` **Bir seçenek gir** \n> ban => Kullanıcıyı Banlar. \n> banyetkili => Ban Komutunu Kullanabilecek Kişiyi Ayarlar.\n> banlog => Banlanan Kişilerin Loglanacağı Yeri Ayarlar. \n> bansay => Sunucuda Kaç Banlı Üye Var Gösterir. \n> banlimit => Sunucuda ki Ban Limiti Ayarlar. \n> banlimit-sıfırla => Etiketlenen Kullanıcının Ban Limitini Sıfırlar. `)
   .setThumbnail(message.author.avatarURL({dynamic:true}))
   if(!command) return message.channel.send(elminster)
