@@ -13,28 +13,30 @@ exports.run = async(client, message, args) => {
   . setDescription (` **Bir seçenek gir** \n> ban => Kullanıcıyı Banlar. \n> banyetkili => Ban Komutunu Kullanabilecek Kişiyi Ayarlar.\n> banlog => Banlanan Kişilerin Loglanacağı Yeri Ayarlar. \n> bansay => Sunucuda Kaç Banlı Üye Var Gösterir. \n> banlimit => Sunucuda ki Ban Limiti Ayarlar. \n> banlimit-sıfırla => Etiketlenen Kullanıcının Ban Limitini Sıfırlar. `)
   .setThumbnail(message.author.avatarURL({dynamic:true}))
   if(!command) return message.channel.send(elminster)
-    if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**Bu komut için `sunucuyu yönet` izni gerekli!**").then(m => m.delete(10000))
-    
+   
   if(command.toLowerCase() === "banlog") {
+     if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**Bu komut için `sunucuyu yönet` izni gerekli!**").then(m => m.delete(10000))
+    
     let  kanal = message.mentions.channels.first()
     if(!kanal) return message.channel.send(`Kanaletiketle`)
     db.set(`banlogss_${message.guild.id}`,kanal.id)
     message.channel.send(`  Ban Log Kanalı ${kanal} olarak ayarlandı`)
     
 }
-    if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**Bu komut için `sunucuyu yönet` izni gerekli!**").then(m => m.delete(10000))
-    
+   
   if(command.toLowerCase() === "banyetkili") {
+     if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**Bu komut için `sunucuyu yönet` izni gerekli!**").then(m => m.delete(10000))
+    
     let rol = message.mentions.roles.first()
     if(!rol) return message.channel.send('rol etiketle')
     db.set(`banrolss_${message.guild.id}`,rol.id)
     message.channel.send(`Ban Yetkili Rol ${rol} olarak ayarlandi`)
     
     }
-  if(message.author.id !== message.guild.owner.user.id) return message.channel.send(`Bu kullanmak için kurucu olmalısın.`)
-   
+ 
   if(command.toLowerCase() === "banlimit") {
-    
+     if(message.author.id !== message.guild.owner.user.id) return message.channel.send(`Bu kullanmak için kurucu olmalısın.`)
+   
    if(!args[1]) return message.reply("Limiti girmedin!")
    if(isNaN(args[1])) return message.reply(`Limit Sadece Sayı Olabilir.`);
 
@@ -43,9 +45,10 @@ exports.run = async(client, message, args) => {
   message.channel.send(`Ban Limiti \`${args[1]}\` Sayısına Ayarlandı!`);
 
     }
-  if(message.author.id !== message.guild.owner.user.id) return message.channel.send(`Bu kullanmak için kurucu olmalısın.`)
-   
+ 
   if(command.toLowerCase() === "banlimit-sıfırla") {
+     if(message.author.id !== message.guild.owner.user.id) return message.channel.send(`Bu kullanmak için kurucu olmalısın.`)
+   
     let bansss = db.fetch(`banlogss_${message.guild.id}`)
     let etiket = message.mentions.users.first() 
     if(!etiket) return message.reply('Etiket ')
