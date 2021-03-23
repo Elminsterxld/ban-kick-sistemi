@@ -13,28 +13,30 @@ exports.run = async(client, message, args) => {
   . setDescription (` **Bir seçenek gir** \n> kick => \`Kullanıcıyı kickler.\` \n> kickyetkili => \`Kick Komutunu Kullanabilecek Kişiyi Ayarlar.\`\n> kicklog => \`Kicklenen Kişilerin Loglanacağı Yeri Ayarlar.\`\n> kicklimit => \`Sunucuda ki Kick Limiti Ayarlar.\` \n> kicklimit-sıfırla => \`Etiketlenen Kullanıcının KickLimitini Sıfırlar.\``)
   .setThumbnail(message.author.avatarURL({dynamic:true}))
   if(!command) return message.channel.send(elminster)
-    if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**Bu komut için `sunucuyu yönet` izni gerekli!**").then(m => m.delete(10000))
-    
+   
   if(command.toLowerCase() === "kicklog") {
+     if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**Bu komut için `sunucuyu yönet` izni gerekli!**").then(m => m.delete(10000))
+    
     let  kanal = message.mentions.channels.first()
     if(!kanal) return message.channel.send(`Kanaletiketle`)
     db.set(`kicklogss_${message.guild.id}`,kanal.id)
     message.channel.send(`Kick Log Kanalı ${kanal} olarak ayarlandı`)
     
 }
-    if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**Bu komut için `sunucuyu yönet` izni gerekli!**").then(m => m.delete(10000))
-    
+   
   if(command.toLowerCase() === "kickyetkili") {
+     if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**Bu komut için `sunucuyu yönet` izni gerekli!**").then(m => m.delete(10000))
+    
     let rol = message.mentions.roles.first()
     if(!rol) return message.channel.send('rol etiketle')
     db.set(`kickrolss_${message.guild.id}`,rol.id)
     message.channel.send(`Kick Yetkili Rol ${rol} olarak ayarlandi`)
     
     }
-  if(message.author.id !== message.guild.owner.user.id) return message.channel.send(`Bu kullanmak için kurucu olmalısın.`)
-   
+
   if(command.toLowerCase() === "kicklimit") {
-    
+      if(message.author.id !== message.guild.owner.user.id) return message.channel.send(`Bu kullanmak için kurucu olmalısın.`)
+   
    if(!args[1]) return message.reply("Limiti girmedin!")
    if(isNaN(args[1])) return message.reply(`Limit Sadece Sayı Olabilir.`);
 
@@ -43,9 +45,10 @@ exports.run = async(client, message, args) => {
   message.channel.send(`Kick Limiti \`${args[1]}\` Sayısına Ayarlandı!`);
 
     }
-  if(message.author.id !== message.guild.owner.user.id) return message.channel.send(`Bu kullanmak için kurucu olmalısın.`)
-   
+  
   if(command.toLowerCase() === "kicklimit-sıfırla") {
+      if(message.author.id !== message.guild.owner.user.id) return message.channel.send(`Bu kullanmak için kurucu olmalısın.`)
+   
     let kicksss = db.fetch(`kicklogss_${message.guild.id}`)
     let etiket = message.mentions.users.first() 
     if(!etiket) return message.reply('Etiket ')
